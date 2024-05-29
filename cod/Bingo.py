@@ -12,6 +12,22 @@ import random as rd
 class Bingo():
     
     def __init__(self, num, rango, revisiones):
+        ''' Constructor de un juego de bingo
+
+        Parametros
+        ----------
+        num : int
+            Número de tableros.
+        rango : int
+            Rango de los tableros.
+        revisiones : list
+            Lista con los tipos de revisiones.
+
+        Retorna
+        -------
+        Nada.
+
+        '''
         self.__num = num
         self.__rango = rango
         self.__tableros = []
@@ -20,22 +36,62 @@ class Bingo():
       
     @property
     def salidos(self):
+        ''' Getter de salidos
+
+        Retorna
+        -------
+        list
+            Lista con los números salidos.
+
+        '''
         return self.__salidos
     
     @property
     def tableros(self):
+        ''' Getter de tableros
+
+        Retorna
+        -------
+        list
+            Lista con los tableros.
+
+        '''
         return self.__tableros
     
     @property
     def rango(self):
+        ''' Getter de rango
+
+        Retorna
+        -------
+        int
+            Rango de los tableros.
+
+        '''
         return self.__rango
     
     @property
     def num(self):
+        ''' Getter de num
+
+        Retorna
+        -------
+        int
+            Número de tableros.
+
+        '''
         return self.__num
     
     @property
     def revisiones(self):
+        ''' Getter de revisiones
+
+        Retorna
+        -------
+        list
+            Lista con los tipos de revisiones.
+
+        '''
         return self.__revisiones
     
     @salidos.setter
@@ -59,12 +115,17 @@ class Bingo():
         self.__num = new_num
     
     def __str__(self):
-        return f'Colección de tableros \nRango: {self.__rango} \nNumero de tableros: {self.__num} \nTipo de revisiones: {self.__revisiones} \nNúmeros salidos: {self.__salidos}' 
+        return f'''
+                Colección de tableros 
+                Rango: {self.__rango} 
+                Numero de tableros: {self.__num} 
+                Tipo de revisiones: {self.__revisiones} 
+                Números salidos: {self.__salidos}
+                ''' 
     
     
     def construir(self):
-        numero = self.__num
-        for i in range(numero):
+        for i in range(self.__num):
             tablero = tbl(self.__rango)
             tablero.generar()
             self.__tableros.append(tablero)
@@ -75,82 +136,28 @@ class Bingo():
         else:
             numero = self.__num
             for i in range(numero):
-                self.__tableros[i].marcado = np.matrix([[False,False,False,False,False],
-                                                        [False,False,False,False,False], 
-                                                        [False,False,True,False,False], 
-                                                        [False,False,False,False,False], 
-                                                        [False,False,False,False,False]])
+                self.__tableros[i].marcado = np.matrix([
+                    [False,False,False,False,False],
+                    [False,False,False,False,False], 
+                    [False,False,True,False,False], 
+                    [False,False,False,False,False], 
+                    [False,False,False,False,False]
+                ])
     
-    def revisar(self):
-        revisar = self.__revisiones
-        for i in range(self.__num):
-            if 'Horizontal' in revisar:
-                boolean = self.__tableros[i].revisarHorizontal()
-                if boolean:
-                    print(f'El tablero {i+1} ha ganado por la combinación Horizontal')
-                    return True
-            
-            if 'Vertical' in revisar:
-                boolean = self.__tableros[i].revisarVertical()
-                if boolean:
-                    print(f'El tablero {i+1} ha ganado por la combinación Vertical')
-                    return True
-            
-            if 'Diagonal' in revisar:
-                boolean = self.__tableros[i].revisarDiagonal()
-                if boolean:
-                    print(f'El tablero {i+1} ha ganado por la combinación Diagonal')
-                    return True
-            
-            if 'H' in revisar:
-                boolean = self.__tableros[i].revisarH()
-                if boolean:
-                    # print(f'El tablero {i+1} ha ganado por la combinación tipo H')
-                    return True
-            
-            if 'I' in revisar:
-                boolean = self.__tableros[i].revisarI()
-                if boolean:
-                    # print(f'El tablero {i+1} ha ganado por la combinación tipo H')
-                    return True
-                        
-            if 'O' in revisar:
-                boolean = self.__tableros[i].revisarO()
-                if boolean:
-                    # print(f'El tablero {i+1} ha ganado por la combinación tipo O')
-                    return True
-            
-            if 'X' in revisar:
-                boolean = self.__tableros[i].revisarX()
-                if boolean:
-                    # print(f'El tablero {i+1} ha ganado por la combinación tipo X')                    
-                    return True
-            
-            if 'Z' in revisar:
-                boolean = self.__tableros[i].revisarZ()
-                if boolean:
-                    # print(f'El tablero {i+1} ha ganado por la combinación tipo Z')
-                    return True
-            
-            if 'N' in revisar:
-                boolean = self.__tableros[i].revisarN()
-                if boolean:
-                    # print(f'El tablero {i+1} ha ganado por la combinación tipo N')
-                    return True
-            
-            if 'T' in revisar:
-                boolean = self.__tableros[i].revisarT()
-                if boolean:
-                    # print(f'El tablero {i+1} ha ganado por la combinación tipo T')
-                    return True
-            
-            if 'Full' in revisar:
-                boolean = self.__tableros[i].revisarFull()
-                if boolean:
-                    # print(f'El tablero {i+1} ha ganado por tablero lleno')
-                    return True
-            
-        return False
+    def revisar(self, imprimir):
+        if self.__tableros == []:
+            print("Construya los valores primero")
+        else:
+            win = False
+            for i in range(self.__num):
+                for j in self.__revisiones:
+                    if(self.__tableros[i].revisar(j)):
+                        win = True # múltiples ganadores
+                        if imprimir:
+                            print(
+                                f'El tablero {i+1} ganó por la combinación {j}'
+                            )        
+            return win
     
     def num(self, numero):
         if self.__tableros == []:
@@ -173,13 +180,16 @@ class Bingo():
         # print(f'El numero {num} ha salido')
         self = self.num(num)            
             
-    def simular_juego(self):
-        a = self
-        boolean = False
-        while boolean == False:
-            self.num_random()
-            boolean = a.revisar()
-        return len(self.__salidos)
+    def simular_juego(self, imprimir):
+        if self.__tableros == []:
+            print("Construya los valores primero")
+        else:
+            a = self
+            boolean = False
+            while boolean == False:
+                self.num_random()
+                boolean = a.revisar(imprimir)
+            return len(self.__salidos)
     
             
             

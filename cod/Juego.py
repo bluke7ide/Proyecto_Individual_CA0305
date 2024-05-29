@@ -39,12 +39,16 @@ class Juego():
         self.__rango = new_rango
         
     def __str__(self):
-        return f'Simulaciones: {self.__sim} \nRango: {self.__rango} \nNumero de tableros: {self.__tableros}' 
+        return f'''
+                Simulaciones: {self.__sim} 
+                Rango: {self.__rango} 
+                Numero de tableros: {self.__tableros}
+                ''' 
         
     def mean_salidos(sim, rango, tableros):
         proy = []
         for i in range(sim):
-            a = Bingo(self.__num, rango, [''])
+            a = Bingo(tableros, rango, [''])
             a.construir()
             proy.append(a.num(rd.randint(1,rango)))
             print(i)

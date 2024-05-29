@@ -61,7 +61,13 @@ class Tablero():
         self.__rango = new_rango
       
     def __str__(self):
-        return f'Tablero: \n{self.__tablero}\nMarcados: \n{self.__marcado} \nRango: {self.__rango}'
+        return f'''
+                Tablero: 
+                {self.__tablero}
+                Marcados: 
+                {self.__marcado} 
+                Rango: {self.__rango}
+                '''
 
     def generar(self):
         divs = self.__rango//5

@@ -231,8 +231,8 @@ class Bingo():
         if self.__tableros == []:
             print("Construya los valores primero")
         else:
-            numero = self.__num
-            for i in range(numero):
+            self.__salidos = []
+            for i in range(self.__num):
                 self.__tableros[i].marcado = np.matrix([
                     [False,False,False,False,False],
                     [False,False,False,False,False], 
@@ -317,8 +317,7 @@ class Bingo():
             num = rd.randint(1, self.__rango)
         if imprimir:
             print(f'El numero {num} ha salido')
-        self = self.num(num) 
-        
+        return self.num(num) 
             
     def simular_juego(self, imprimir):
         '''

@@ -50,7 +50,7 @@ class Simulaciones():
         for i in range(self.__sim):
             local = Bingo(self.__num, self.__rango, [''])
             local.construir()
-            proy.append(local.num(rd.randint(1,self.__rango)))
+            proy.append(local.num_random(False))
             print(i)
         mean = sum(proy)/len(proy)
         return f'La media simulada de que los tableros marquen es {mean}'
@@ -79,4 +79,22 @@ class Simulaciones():
             print(i)
         prob = cuentan/self.__sim
         return f'La prob simulada de que ganen dos o más tableros es {prob}'
+    
+    def mean_bolita(self):
+        proy = []
+        for j in range(self.__rango):
+            proy.append([])
+        for i in range(self.__sim):
+            local = Bingo(self.__num, self.__rango, [''])
+            local.construir()
+            for j in range(self.__rango):
+                proy[j].append(local.num_random(False))
+            print(i)
+        for j in range(self.__rango):    
+            proy[j] = sum(proy[j])/len(proy[j])
+        return proy
+    
+    
+    
+    
     

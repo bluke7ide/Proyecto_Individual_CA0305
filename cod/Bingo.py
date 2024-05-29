@@ -252,18 +252,18 @@ class Bingo():
 
         Retorna
         -------
-        win : boolean
-            Si el juego ha sido terminado o no
+        win : int
+            Cantidad de tableros ganadores
 
         '''
         if self.__tableros == []:
             print("Construya los valores primero")
         else:
-            win = False
+            win = 0
             for i in range(self.__num):
                 for j in self.__revisiones:
                     if(self.__tableros[i].revisar(j)):
-                        win = True # múltiples ganadores
+                        win += 1 # múltiples ganadores
                         if imprimir:
                             print(
                                 f'El tablero {i+1} ganó por la combinación {j}'
@@ -338,10 +338,10 @@ class Bingo():
             print("Construya los valores primero")
         else:
             a = self
-            boolean = False
-            while boolean == False:
+            win = 0
+            while win == 0:
                 self.num_random(False)
-                boolean = a.revisar(imprimir)
+                win = a.revisar(imprimir)
             return len(self.__salidos)
     
             

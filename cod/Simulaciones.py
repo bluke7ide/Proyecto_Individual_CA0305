@@ -6,6 +6,7 @@ Created on Tue Apr 30 18:40:40 2024
 """
 
 from Bingo import Bingo
+from Tablero import Tablero 
 import random as rd
 
 class Simulaciones():
@@ -94,7 +95,63 @@ class Simulaciones():
             proy[j] = sum(proy[j])/len(proy[j])
         return proy
     
+    def mean_especifico(self, tipo):
+        proy = []
+        for i in range(self.__sim):
+            local = Bingo(self.__num, 
+                      self.__rango,
+                      tipo)
+            local.construir()
+            proy.append(local.simular_juego(False)[0])
+            print(i)
+        mean = sum(proy)/len(proy)
+        return f'La media simulada de que un tablero gane es {mean}'
     
-    
-    
+    def prob_cond(self):
+        prob = []
+        for i in range(24):
+            prob.append([])
+            for j in range(self.__rango-i):
+                prob[i].append([])
+                local = Tablero(75)
+                local.generar()
+                salidos = []
+                num = rd.randint(1, self.__rango)
+                for c in range(i):
+                    while num in salidos or num not in local.tablero:
+                        num = rd.randint(1, self.__rango)
+                    local.marcar(num)
+                num = rd.randint(1, self.__rango)
+                for c in range(j-i):
+                    while num in salidos or num in local.tablero:
+                        num = rd.randint(1, self.__rango)
+                
+                
+                for c in range(self.__sim):
+                    num = rd.randint(1, self.__rango)
+                    while num in salidos:
+                        num = rd.randint(1, self.__rango)
+                    prob[i][j].append(num in local.tablero)
+                prob[i][j] = sum(prob[i][j])/self.__sim
+                
+            print(i)
+        return prob
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
     

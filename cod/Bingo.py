@@ -5,7 +5,7 @@ Created on Fri Apr 26 16:29:28 2024
 @author: PC01
 """
 
-from Tablero import Tablero as tbl
+from Tablero import Tablero
 import numpy as np
 import random as rd
 
@@ -215,7 +215,7 @@ class Bingo():
 
         '''
         for i in range(self.__num):
-            tablero = tbl(self.__rango)
+            tablero = Tablero(self.__rango)
             tablero.generar()
             self.__tableros.append(tablero)
             

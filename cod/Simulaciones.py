@@ -45,22 +45,38 @@ class Simulaciones():
                 Numero de tableros: {self.__tableros}
                 ''' 
         
-    def mean_salidos(sim, rango, tableros):
+    def mean_salidos(self):
         proy = []
-        for i in range(sim):
-            a = Bingo(tableros, rango, [''])
-            a.construir()
-            proy.append(a.num(rd.randint(1,rango)))
+        for i in range(self.__sim):
+            local = Bingo(self.__num, self.__rango, [''])
+            local.construir()
+            proy.append(local.num(rd.randint(1,self.__rango)))
             print(i)
-        mean_salidos = sum(proy)/len(proy)
-        return f'La media simulada de que los tableros no marquen es {mean_salidos}'
+        mean = sum(proy)/len(proy)
+        return f'La media simulada de que los tableros marquen es {mean}'
         
-    def mean_normal(sim, rango, tableros):
+    def mean_normal(self):
         proy = []
-        for i in range(sim):
-            a = Bingo(tableros, rango, ['Horizontal', 'Vertical', 'Diagonal'])
-            a.construir()
-            proy.append(a.simular_juego())
+        for i in range(self.__sim):
+            local = Bingo(self.__num, 
+                      self.__rango,
+                      ['Horizontal', 'Vertical', 'Diagonal'])
+            local.construir()
+            proy.append(local.simular_juego(False)[0])
             print(i)
-        mean_normal = sum(proy)/len(proy)
-        return f'La media simulada de que un tablero gane es {mean_normal}'
+        mean = sum(proy)/len(proy)
+        return f'La media simulada de que un tablero gane es {mean}'
+    
+    def prob_mas_1(self):
+        cuentan = 0
+        for i in range(self.__sim):
+            local = Bingo(self.__num, 
+                      self.__rango,
+                      ['Horizontal', 'Vertical', 'Diagonal'])
+            local.construir()
+            if local.simular_juego(False)[1] != 1:
+                cuentan +=1
+            print(i)
+        prob = cuentan/self.__sim
+        return f'La prob simulada de que ganen dos o más tableros es {prob}'
+    

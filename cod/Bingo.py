@@ -317,7 +317,8 @@ class Bingo():
             num = rd.randint(1, self.__rango)
         if imprimir:
             print(f'El numero {num} ha salido')
-        self = self.num(num)            
+        self = self.num(num) 
+        
             
     def simular_juego(self, imprimir):
         '''
@@ -337,12 +338,11 @@ class Bingo():
         if self.__tableros == []:
             print("Construya los valores primero")
         else:
-            a = self
             win = 0
             while win == 0:
                 self.num_random(False)
-                win = a.revisar(imprimir)
-            return len(self.__salidos)
+                win = self.revisar(imprimir)
+            return len(self.__salidos), win
     
             
             

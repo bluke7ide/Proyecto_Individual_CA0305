@@ -8,7 +8,7 @@ Created on Tue Apr 30 18:40:40 2024
 from Bingo import Bingo
 import random as rd
 
-class Juego():
+class Simulaciones():
     def __init__(self, sim, rango, num):
         self.__sim = sim
         self.__rango = rango
@@ -40,7 +40,7 @@ class Juego():
         
     def __str__(self):
         return f'''
-                Simulaciones: {self.__sim} 
+                Número de simulaciones: {self.__sim} 
                 Rango: {self.__rango} 
                 Numero de tableros: {self.__tableros}
                 ''' 

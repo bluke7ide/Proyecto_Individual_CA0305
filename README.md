@@ -9,5 +9,5 @@ El módulo Bingo() crea una simulación de bingo, donde crea varios tableros que
 hayan sido especificados en el parámetro y puede marcar todos los tableros al
 mismo tiempo, verificando si alguno de ellos gana o no. 
 
-El módulo main() realiza funciones y simulaciones para averiguar, según el 
+El módulo Simulaciones() realiza funciones y simulaciones para averiguar, según el 
 método de MonteCarlo, cantidades y propiedades de simulaciones. 

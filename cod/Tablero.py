@@ -337,20 +337,3 @@ class Tablero():
              if False not in self.__marcado:
                  return True
              return False  
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

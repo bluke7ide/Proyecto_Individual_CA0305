@@ -225,15 +225,15 @@ class Simulaciones():
 
         '''
         prob = []
-        for i in range(24):
+        for i in range(23):
             prob.append([])
-            for j in range(self.__rango-24 + i):
+            for j in range(self.__rango-23 + i):
                 prob[i].append([])
                 local = Tablero(75)
                 local.generar()
                 salidos = []
                 num = rd.randint(1, self.__rango)
-                for c in range(i+1):
+                for c in range(i):
                     while num in salidos or num not in local.tablero:
                         num = rd.randint(1, self.__rango)
                     local.marcar(num)
@@ -250,8 +250,7 @@ class Simulaciones():
                         num = rd.randint(1, self.__rango)
                     prob[i][j].append(num in local.tablero)
                 prob[i][j] = sum(prob[i][j])/self.__sim  
-                
-            print(i)
+        
         return prob
     
     def mean_especifico(self, tipo):

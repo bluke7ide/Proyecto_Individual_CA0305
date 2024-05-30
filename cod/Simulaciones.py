@@ -137,8 +137,13 @@ class Simulaciones():
             print(i)
         return prob
             
-            
-            
+    def prob_win(self, marcado, salidos):
+        # Considera que tiene al menos una combinación con una bolita restante
+        prob_tablero = 24/self.__rango
+        prob_win = 1/(24-marcado) *(salidos+1)/24
+        if marcado < 3 or self.__rango - salidos < 24 - marcado or marcado > salidos:
+            return 0
+        return prob_tablero*prob_win
             
             
             

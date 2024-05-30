@@ -126,7 +126,7 @@ class Bingo():
         Parámetros
         ----------
         new_rango : int
-            Rango de los tableros.
+            Rango nuevo de los tableros.
 
         Retorna
         -------
@@ -193,7 +193,8 @@ class Bingo():
 
         Retorna
         -------
-        El string que despliega algunos atributos
+        str
+            El string que despliega algunos atributos
 
         '''
         return f'''

@@ -216,8 +216,7 @@ class Simulaciones():
         '''
         Función que calcula la probabilidad condicional a que en el tablero, 
         habiendo marcado una cantidad de casillas, pueda marcar la siguiente
-        bolita. Note que sucede lo mismo, al ser eventos independientes.
-        También no me di cuenta al programarlo, así que ahí está.
+        bolita. 
 
         Returns
         -------
@@ -228,28 +227,31 @@ class Simulaciones():
         prob = []
         for i in range(24):
             prob.append([])
-            for j in range(self.__rango-i):
+            for j in range(self.__rango-24 + i):
                 prob[i].append([])
                 local = Tablero(75)
                 local.generar()
                 salidos = []
                 num = rd.randint(1, self.__rango)
-                for c in range(i):
+                for c in range(i+1):
                     while num in salidos or num not in local.tablero:
                         num = rd.randint(1, self.__rango)
                     local.marcar(num)
+                    salidos.append(num)
                 num = rd.randint(1, self.__rango)
                 for c in range(j-i):
                     while num in salidos or num in local.tablero:
                         num = rd.randint(1, self.__rango)
-                
+                    salidos.append(num)
                 
                 for c in range(self.__sim):
                     num = rd.randint(1, self.__rango)
                     while num in salidos:
                         num = rd.randint(1, self.__rango)
                     prob[i][j].append(num in local.tablero)
-                prob[i][j] = sum(prob[i][j])/self.__sim      
+                prob[i][j] = sum(prob[i][j])/self.__sim  
+                
+            print(i)
         return prob
     
     def mean_especifico(self, tipo):

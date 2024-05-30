@@ -343,4 +343,4 @@ class Bingo():
                 self.num_random(False)
                 win = self.revisar(imprimir)
             return len(self.__salidos), win
-     
+        

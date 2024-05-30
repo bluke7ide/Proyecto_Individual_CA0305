@@ -52,7 +52,6 @@ class Simulaciones():
             local = Bingo(self.__num, self.__rango, [''])
             local.construir()
             proy.append(local.num_random(False))
-            print(i)
         mean = sum(proy)/len(proy)
         return f'La media simulada de que los tableros marquen es {mean}'
         
@@ -64,7 +63,6 @@ class Simulaciones():
                       ['Horizontal', 'Vertical', 'Diagonal'])
             local.construir()
             proy.append(local.simular_juego(False)[0])
-            print(i)
         mean = sum(proy)/len(proy)
         return f'La media simulada de que un tablero gane es {mean}'
     
@@ -77,7 +75,6 @@ class Simulaciones():
             local.construir()
             if local.simular_juego(False)[1] != 1:
                 cuentan +=1
-            print(i)
         prob = cuentan/self.__sim
         return f'La prob simulada de que ganen dos o más tableros es {prob}'
     
@@ -90,22 +87,9 @@ class Simulaciones():
             local.construir()
             for j in range(self.__rango):
                 proy[j].append(local.num_random(False))
-            print(i)
         for j in range(self.__rango):    
             proy[j] = sum(proy[j])/len(proy[j])
         return proy
-    
-    def mean_especifico(self, tipo):
-        proy = []
-        for i in range(self.__sim):
-            local = Bingo(self.__num, 
-                      self.__rango,
-                      tipo)
-            local.construir()
-            proy.append(local.simular_juego(False)[0])
-            print(i)
-        mean = sum(proy)/len(proy)
-        return f'La media simulada de que un tablero gane es {mean}'
     
     def prob_cond(self):
         prob = []
@@ -132,10 +116,19 @@ class Simulaciones():
                     while num in salidos:
                         num = rd.randint(1, self.__rango)
                     prob[i][j].append(num in local.tablero)
-                prob[i][j] = sum(prob[i][j])/self.__sim
-                
-            print(i)
+                prob[i][j] = sum(prob[i][j])/self.__sim      
         return prob
+    
+    def mean_especifico(self, tipo):
+        proy = []
+        for i in range(self.__sim):
+            local = Bingo(self.__num, 
+                      self.__rango,
+                      tipo)
+            local.construir()
+            proy.append(local.simular_juego(False)[0])
+        mean = sum(proy)/len(proy)
+        return f'La media simulada de que un tablero gane es {mean}'
             
     def prob_win(self, marcado, salidos):
         # Considera que tiene al menos una combinación con una bolita restante

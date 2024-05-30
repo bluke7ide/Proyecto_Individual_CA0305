@@ -17,6 +17,15 @@ class Simulaciones():
         
     @property
     def sim(self):
+        '''
+        Getter de sim
+
+        Retorna
+        -------
+        int
+            Número de simulaciones. Recomendado 100.
+
+        '''
         return self.__sim
     
     @property
